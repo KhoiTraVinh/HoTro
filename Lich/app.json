@@ -1,0 +1,12 @@
+{
+  "name": "Lich",
+  "displayName": "Lich",
+  "expo": {
+    "name": "Lich",
+    "slug": "Lich",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}

@@ -1,0 +1,166 @@
+import React, {Component, useState} from 'react';
+import {View, Text, TextInput, StyleSheet, SafeAreaView, TouchableOpacity, FlatList, KeyboardAvoidingView, Keyboard, Animated} from 'react-native';
+import { AntDesign, Ionicons } from '@expo/vector-icons';
+import Swipeable from 'react-native-gesture-handler/Swipeable';
+
+export default class EventModal extends Component{
+    state = {
+        newEvent: ""
+    };
+
+    toggleEventCompleted = index => {
+        let list = this.props.list;
+        list.todos[index].completed = !list.todos[index].completed;
+
+        this.props.updateList(list);
+    }
+
+    addEvent = () => {
+        let list = this.props.list;
+        list.todos.push({ title: this.state.newEvent, completed: false });
+
+        this.props.updateList(list);
+        this.setState({newEvent: ""});
+        
+        Keyboard.dismiss();
+    }
+
+    renderEvent = (event, index) => {
+        return(
+            <Swipeable renderRightActions ={(_, dragX) => this.rightActions(dragX, index)}>
+                <View style={styles.EventContainer}>
+                    <TouchableOpacity onPress={() => this.toggleEventCompleted(index)}>
+                        <Ionicons 
+                        name={event.completed ? "ios-square" : "ios-square-outline"}
+                        size={24} 
+                        color="#808080" 
+                        style={{width: 32}}/>
+                    </TouchableOpacity>
+                    <Text
+                    style={[
+                        styles.Event,
+                        {
+                            textDecorationLine: event.completed ? "line-through" : "none",
+                            color: event.completed ? color="#808080" : color="#000"
+                        }
+                    ]}>
+                        {event.title}
+                    </Text>
+                </View>
+            </Swipeable>
+           
+        );
+    };
+
+
+    rightActions = (dragX, index) => {
+        return(
+            <TouchableOpacity>
+                <Animated.View style={styles.deleteButton}>
+                    <Animated.Text>Delete</Animated.Text>
+                </Animated.View>
+            </TouchableOpacity>
+        );
+    };
+
+    render() {
+        const list = this.props.list;
+        const taskCount = list.todos.length;
+        const completedCount = list.todos.filter(todo => todo.completed).length
+
+        return (
+            <KeyboardAvoidingView style={{ flex:1 }} behavior="height">
+                <SafeAreaView style={styles.container}>
+                    <TouchableOpacity 
+                        style={{ position: "absolute", top: 64, right: 32, zIndex: 10}}
+                        onPress={this.props.closeModal}>
+                        <AntDesign name="close" size={24} color="#000" />
+                    </TouchableOpacity>
+
+                    <View style={[styles.section, styles.header, { borderBottomColor: list.color}]}>
+                        <View>
+                            <Text style={styles.title}>{list.name}</Text>
+                            <Text style={styles.taskCount}>
+                                {completedCount} of {taskCount} tasks
+                            </Text>
+                        </View>
+                    </View>
+                    <View style={[styles.section, {flex: 3}]}>
+                        <FlatList 
+                            data={list.todos}
+                            renderItem={({item, index}) => this.renderEvent(item, index)}
+                            keyExtractor={(_, index) => index.toString()}
+                            contentContainerStyle={{ paddingHorizontal: 32, paddingVertical: 64}}
+                            showhorizontalScrollIndicator={false}/>
+                    </View>
+                    <View style={[styles.section, styles.footer]}>
+                        <TextInput style={[styles.input, {borderColor: list.color}]} 
+                            onChangeText={text => this.setState({ newEvent: text})}
+                            value={this.state.newEvent}/>
+                        <TouchableOpacity style={[styles.addEvent,{ backgroundColor: list.color}]}
+                            onPress={() => this.addEvent()}>
+                            <AntDesign name="plus" size={16} color="#fff"/>
+                        </TouchableOpacity>
+                    </View>
+                </SafeAreaView>
+            </KeyboardAvoidingView>
+        );
+    }
+}
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center"
+    },
+    section: {
+        flex: 1,
+        alignSelf: "stretch"
+    },
+    header: {
+        justifyContent: "flex-end",
+        marginLeft: 64,
+        borderBottomWidth: 3
+    },
+    title: {
+        fontSize: 30,
+        fontWeight: "800",
+        color: "#000"
+    },
+    taskCount: {
+        marginTop: 4,
+        marginBottom: 16,
+        color: "#4A4A4A",
+        fontWeight: "600"
+    },
+    footer: {
+        paddingHorizontal: 32,
+        flexDirection: "row",
+        alignItems: "center"
+    },
+    input: {
+        flex: 1,
+        height: 48,
+        borderWidth: StyleSheet.hairlineWidth,
+        borderRadius: 6,
+        marginRight: 8,
+        paddingHorizontal: 8
+    },
+    addEvent: {
+        borderRadius: 4,
+        padding: 16,
+        alignItems: "center",
+        justifyContent: "center"
+    },
+    EventContainer: {
+        paddingVertical: 16,
+        flexDirection: "row",
+        alignItems: "center"
+    },
+    Event: {
+        color: "#000",
+        fontWeight: "700",
+        fontSize: 16
+    }
+})
