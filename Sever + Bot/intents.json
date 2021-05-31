@@ -1,0 +1,73 @@
+{"intents": [
+        {"tag": "greeting",
+         "patterns": ["Hi there", "How are you", "Is anyone there?","Hey","Hola", "Hello", "Good day"],
+         "responses": ["Hello, thanks for asking", "Good to see you again", "Hi there, how can I help?"],
+         "context": [""]
+        },
+        {"tag": "goodbye",
+         "patterns": ["Bye", "See you later", "Goodbye", "Nice chatting to you, bye", "Till next time"],
+         "responses": ["See you!", "Have a nice day", "Bye! Come back again soon."],
+         "context": [""]
+        },
+        {"tag": "thanks",
+         "patterns": ["Thanks", "Thank you", "That's helpful", "Awesome, thanks", "Thanks for helping me"],
+         "responses": ["Happy to help!", "Any time!", "My pleasure"],
+         "context": [""]
+        },
+        {"tag": "noanswer",
+         "patterns": [" "],
+         "responses": ["Sorry, can't understand you", "Please give me more info", "Not sure I understand"],
+         "context": [""]
+        },
+        {"tag": "options",
+         "patterns": ["Can i still get a place if you don't quite get the grades?", "Which qualifications do your university require?"],
+         "responses": ["I can guide you through Adverse drug reaction list, Blood pressure tracking, Hospitals and Pharmacies", "Offering support for Adverse drug reaction, Blood pressure, Hospitals and Pharmacies"],
+         "context": [""]
+        },
+        {"tag": "Requirement",
+          "patterns": [ "What grades do i need to enroll?"],
+         "responses": ["IT:21,Economic:20,..."],
+         "context": [""]
+        },
+        {"tag": "Bodit",
+         "patterns": ["Can you give me a list of renown teachers in your courses?"],
+          "responses": [ "Tran Khai Thien, Tran Khai Thien 2, Tran Khai Thien 3"],
+         "context": [""]
+        },
+        {"tag": "Bodit2",
+         "patterns": ["Who is the creator of this application?"],
+         "responses": ["Duong Thien Khoi student of Professor Tran Khai Thien"],
+         "context": [""]
+        },
+        {"tag": "Bodit3",
+         "patterns": ["who is the most handsome professor of them all?"],
+         "responses": ["professor: Tran Khai Thien"],
+         "context": [""]
+        },
+        {"tag": "Grades",
+         "patterns": ["Can you give me the requirement grades of previous years?"],
+          "responses": ["https://huflit.edu.vn/Thong-bao-chung/diem-chuan-trung-tuyen-dai-hoc-he-chinh-quy-theo-phuong-thuc-xet-tuyen-hoc-ba-thpt-2a-2b-dot-6-nam-2020-1338.html"],
+         "context": ["search_pharmacy_by_name"]
+        },
+        {"tag": "Fee",
+          "patterns": ["How much does the university tuition fee cost?"],
+          "responses": [ "Loading pharmacy details: 2020:900.000d, 2019:770.000d, 2018:700.000d....." ],
+         "context": [""]
+        },
+        {"tag": "uni_search",
+         "patterns": ["How many courses does the your university have?"],
+         "responses": ["IT,EnglishCourses,Law,Tourism,..."],
+         "context": [""]
+        },
+        {"tag": "Masturbate",
+         "patterns": ["Khôi Đẹp Trai"],
+         "responses": ["Dungvay"],
+         "context": [""]
+        },
+        {"tag": "DienKhung",
+         "patterns": ["khoitravinh"],
+         "responses": ["..."],
+         "context": [""]
+        }
+   ]
+}
