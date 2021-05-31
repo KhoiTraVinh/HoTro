@@ -1,0 +1,12 @@
+{
+  "name": "Khoine",
+  "displayName": "Khoine",
+  "expo": {
+    "name": "Khoine",
+    "slug": "Khoine",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
